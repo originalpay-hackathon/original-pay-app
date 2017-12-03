@@ -17,6 +17,7 @@ import {
   ScrollView,
   Vibration,
 } from 'react-native';
+import GalleryScreen from './GalleryScreen';
 
 const flashModeOrder = {
   off: 'on',
@@ -118,7 +119,8 @@ export default class CameraScreen extends React.Component {
 
   takePicture = async function() {
     if (this.camera) {
-      this.camera.takePicture().then(data => {
+      console.log(this.camera)
+      this.camera.takePictureAsync().then(data => {
         FileSystem.moveAsync({
           from: data,
           to: `${FileSystem.documentDirectory}photos/Photo_${this.state
@@ -129,7 +131,7 @@ export default class CameraScreen extends React.Component {
   };
 
   renderGallery() {
-    return null
+    return <GalleryScreen onPress={this.toggleView.bind(this)} />;
   }
 
   renderCamera() {
